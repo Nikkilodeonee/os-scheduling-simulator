@@ -2,8 +2,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 
-
-# Klasa reprezentująca proces
+# Class representing a process
 class Process:
     def __init__(self, pid, arrival_time, burst_time):
         self.pid = pid
@@ -13,8 +12,7 @@ class Process:
         self.completion_time = 0
         self.waiting_time = 0
 
-
-# Generator procesów
+# Process generator
 def generate_processes(n=25, arrival_range=(0, 50), burst_range=(1, 10), seed=None):
     if seed is not None:
         random.seed(seed)
@@ -24,7 +22,6 @@ def generate_processes(n=25, arrival_range=(0, 50), burst_range=(1, 10), seed=No
         burst = random.randint(*burst_range)
         processes.append(Process(i, arrival, burst))
     return processes
-
 
 # FCFS - First Come First Serve
 def fcfs(processes):
@@ -37,10 +34,9 @@ def fcfs(processes):
         p.completion_time = current_time + p.burst_time
         p.waiting_time = p.start_time - p.arrival_time
         current_time = p.completion_time
-    return sorted(processes, key=lambda p: p.pid)  # Sortowanie po PID
+    return sorted(processes, key=lambda p: p.pid)  # Sort by PID
 
-
-# SJF - Shortest Job First (niewywłaszczalny)
+# SJF - Shortest Job First (non-preemptive)
 def sjf(processes):
     processes = sorted(processes, key=lambda p: (p.arrival_time, p.burst_time))
     completed = []
@@ -61,60 +57,48 @@ def sjf(processes):
             completed.append(p)
         else:
             current_time += 1
-    return sorted(completed, key=lambda p: p.pid)  # Sortowanie po PID
+    return sorted(completed, key=lambda p: p.pid)  # Sort by PID
 
-
-# Funkcja do obliczania średnich statystyk
+# Function to calculate average waiting time
 def calculate_average_waiting_time(processes):
     return sum(p.waiting_time for p in processes) / len(processes)
 
-
-# Wizualizacja wyników
+# Visualization of results
 def plot_results(fcfs_processes, sjf_processes):
-    # Sortowanie procesów według PID przed tworzeniem wykresu
+    # Sort processes by PID before plotting
     fcfs_sorted = sorted(fcfs_processes, key=lambda p: p.pid)
     sjf_sorted = sorted(sjf_processes, key=lambda p: p.pid)
-
     labels = [f"P{p.pid}" for p in fcfs_sorted]
     fcfs_waiting = [p.waiting_time for p in fcfs_sorted]
     sjf_waiting = [p.waiting_time for p in sjf_sorted]
-
     x = np.arange(len(labels))
     width = 0.35
-
     fig, ax = plt.subplots(figsize=(12, 6))
     ax.bar(x - width / 2, fcfs_waiting, width, label='FCFS', color='skyblue')
     ax.bar(x + width / 2, sjf_waiting, width, label='SJF', color='salmon')
-
-    ax.set_ylabel('Czas oczekiwania')
-    ax.set_title('Porównanie czasu oczekiwania: FCFS vs SJF (posortowane wg PID)')
+    ax.set_ylabel('Waiting Time')
+    ax.set_title('Waiting Time Comparison: FCFS vs SJF (sorted by PID)')
     ax.set_xticks(x)
     ax.set_xticklabels(labels, rotation=45)
     ax.legend()
-
-    # Dodanie wartości na słupkach
+    # Add values above bars
     for i in range(len(x)):
         ax.text(x[i] - width / 2, fcfs_waiting[i] + 0.2, f'{fcfs_waiting[i]:.1f}',
                 ha='center', va='bottom', fontsize=8)
         ax.text(x[i] + width / 2, sjf_waiting[i] + 0.2, f'{sjf_waiting[i]:.1f}',
                 ha='center', va='bottom', fontsize=8)
-
     plt.tight_layout()
     plt.grid(axis='y', linestyle='--', alpha=0.7)
     plt.show()
 
-
-# Główna funkcja symulacyjna
+# Main simulation function
 def main():
     processes = generate_processes(n=25, seed=42)
     fcfs_result = fcfs([Process(p.pid, p.arrival_time, p.burst_time) for p in processes])
     sjf_result = sjf([Process(p.pid, p.arrival_time, p.burst_time) for p in processes])
-
-    print("Średni czas oczekiwania FCFS:", calculate_average_waiting_time(fcfs_result))
-    print("Średni czas oczekiwania SJF:", calculate_average_waiting_time(sjf_result))
-
+    print("Average waiting time FCFS:", calculate_average_waiting_time(fcfs_result))
+    print("Average waiting time SJF:", calculate_average_waiting_time(sjf_result))
     plot_results(fcfs_result, sjf_result)
-
 
 if __name__ == "__main__":
     main()
