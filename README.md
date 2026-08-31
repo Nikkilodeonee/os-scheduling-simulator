@@ -3,99 +3,48 @@
 ![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
+Coursework project from Operating Systems: a small simulator that compares **FCFS** and **non-preemptive SJF** on randomly generated processes.
+
 ## Overview
-This project implements and compares two fundamental CPU scheduling algorithms:
-- **FCFS (First Come First Serve)**
-- **SJF (Shortest Job First, non-preemptive)**
 
-The program simulates process scheduling with randomly generated processes, computes waiting times, and visualizes results using **Matplotlib**.
+The program generates processes with random arrival and burst times, computes waiting times, and plots a per-process comparison with Matplotlib.
 
----
-
-## Key Features
-- Simulation of process scheduling with random arrival & burst times.
-- Modular object-oriented design for clarity and extension.
-- Computation and visualization of per-process and average waiting times.
-- Side-by-side **bar chart** comparison of FCFS vs SJF waiting times.
-- Reproducible experiments with configurable random seed.
-
----
-
-## Algorithms Explained
+## Algorithms
 
 ### FCFS (First Come First Serve)
-- **Description**: Processes are executed in order of arrival, without preemption.  
-- **Pros**: Simple, fair order handling.  
-- **Cons**: Long jobs can delay shorter ones → higher average waiting time.  
 
-### SJF (Shortest Job First, Non-Preemptive)
-- **Description**: The process with the smallest burst time among arrived processes runs next.  
-- **Pros**: Minimizes average waiting time (theoretically optimal).  
-- **Cons**: Requires knowing burst durations in advance, can starve long jobs.  
+Processes run in arrival order, without preemption. Simple, but a long job can delay shorter ones.
 
----
+### SJF (Shortest Job First, non-preemptive)
 
-## Code Structure
-- **`Process` class** – represents a single process (arrival, burst, waiting time, etc.).  
-- **`generate_processes()`** – creates random processes with given parameters.  
-- **`fcfs()` & `sjf()`** – core scheduling simulators.  
-- **`calculate_average_waiting_time()`** – evaluates efficiency.  
-- **`plot_results()`** – Matplotlib visualization routine.  
+Among processes that have already arrived, the shortest burst runs next. This usually lowers average waiting time, but it needs known burst lengths and can starve long jobs.
 
----
+## Run
 
-## Getting Started
-
-### Install dependencies
 ```bash
-pip install numpy matplotlib
-```
-Run the simulation
-```bash
+pip install -r requirements.txt
 python main.py
 ```
-This will:
 
-Print the average waiting times for both algorithms in the console.
+This prints average waiting times and opens a bar chart of FCFS vs SJF waiting time for each process.
 
-Show a bar chart comparing FCFS and SJF waiting times.
+Default experiment: 25 processes, arrival in `[0, 50]`, burst in `[1, 10]`, seed `42`. Change those values in `main()`.
 
-### Customization
-You can modify:
-
-Number of processes (n)
-
-Arrival time range
-
-Burst time range
-
-Random seed (for reproducibility)
-
-## Example:
 ```python
 processes = generate_processes(n=50, arrival_range=(0, 100), burst_range=(1, 20), seed=123)
 ```
-Results
-From experiments with 25 processes (arrival ∈ [0,50], burst ∈ [1,10]):
 
-| Algorithm | Average Waiting Time |
-|-----------|-----------------------|
-| FCFS      | 41.52                 |
-| SJF       | 24.28                 |
+## Example result
 
-Example Output
-(generated with Matplotlib)
-<img width="1495" height="739" alt="image" src="https://github.com/user-attachments/assets/42db1d37-4692-4263-90f6-5bafc3ee7c84" />
+| Algorithm | Average waiting time |
+|-----------|----------------------|
+| FCFS      | 41.52                |
+| SJF       | 24.28                |
 
-## Conclusion
-SJF consistently outperforms FCFS in average waiting time.
+<img width="1495" height="739" alt="FCFS vs SJF waiting times" src="https://github.com/user-attachments/assets/42db1d37-4692-4263-90f6-5bafc3ee7c84" />
 
-FCFS remains simpler and fair, but less efficient in mixed workloads.
-
-SJF is theoretically optimal but impractical in real OS scheduling without burst-time knowledge.
+SJF wins on average waiting time here. FCFS is simpler. Real OS schedulers rarely use pure SJF because burst time is not known in advance.
 
 ## License
-This project is licensed under the MIT License.
 
-## Author
-Nikkilodeonee
+MIT. Author: [Roman Sushkin](https://github.com/Nikkilodeonee)
