@@ -1,0 +1,3 @@
+include LICENSE main.py requirements.txt
+recursive-include examples *.csv *.json *.svg
+recursive-include docs *.md

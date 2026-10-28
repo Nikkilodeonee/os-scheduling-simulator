@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "parameters": {
+    "source": "generated",
+    "quantum": 2,
+    "seed": 42,
+    "count": 25,
+    "arrival_range": [
+      0,
+      50
+    ],
+    "burst_range": [
+      1,
+      10
+    ]
+  },
+  "metrics": {
+    "FCFS": {
+      "average_waiting_time": 41.52,
+      "average_turnaround_time": 46.72,
+      "average_response_time": 41.52,
+      "cpu_utilization": 0.9923664122137404,
+      "throughput": 0.19083969465648856,
+      "makespan": 131
+    },
+    "SJF": {
+      "average_waiting_time": 24.28,
+      "average_turnaround_time": 29.48,
+      "average_response_time": 24.28,
+      "cpu_utilization": 0.9923664122137404,
+      "throughput": 0.19083969465648856,
+      "makespan": 131
+    },
+    "Round Robin": {
+      "average_waiting_time": 50.24,
+      "average_turnaround_time": 55.44,
+      "average_response_time": 16.24,
+      "cpu_utilization": 0.9923664122137404,
+      "throughput": 0.19083969465648856,
+      "makespan": 131
+    }
+  }
+}

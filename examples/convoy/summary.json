@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "parameters": {
+    "source": "examples\\convoy.csv",
+    "quantum": 2,
+    "seed": null,
+    "count": 4,
+    "arrival_range": null,
+    "burst_range": null
+  },
+  "metrics": {
+    "FCFS": {
+      "average_waiting_time": 7.75,
+      "average_turnaround_time": 11.5,
+      "average_response_time": 7.75,
+      "cpu_utilization": 1.0,
+      "throughput": 0.26666666666666666,
+      "makespan": 15
+    },
+    "SJF": {
+      "average_waiting_time": 3.25,
+      "average_turnaround_time": 7,
+      "average_response_time": 3.25,
+      "cpu_utilization": 1.0,
+      "throughput": 0.26666666666666666,
+      "makespan": 15
+    },
+    "Round Robin": {
+      "average_waiting_time": 5.25,
+      "average_turnaround_time": 9,
+      "average_response_time": 2.25,
+      "cpu_utilization": 1.0,
+      "throughput": 0.26666666666666666,
+      "makespan": 15
+    }
+  }
+}
