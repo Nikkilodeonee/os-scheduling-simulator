@@ -1,0 +1,17 @@
+algorithm,pid,start,end
+FCFS,0,0,8
+FCFS,1,8,12
+FCFS,2,12,14
+FCFS,3,14,15
+SJF,1,0,4
+SJF,3,4,5
+SJF,2,5,7
+SJF,0,7,15
+Round Robin,0,0,2
+Round Robin,1,2,4
+Round Robin,2,4,6
+Round Robin,3,6,7
+Round Robin,0,7,9
+Round Robin,1,9,11
+Round Robin,0,11,13
+Round Robin,0,13,15

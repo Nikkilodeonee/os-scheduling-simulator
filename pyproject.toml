@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=77", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "os-scheduling-simulator"
+version = "1.0.0"
+description = "Reproducible FCFS, SJF, and Round Robin scheduling experiments"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Roman Sushkin"}]
+dependencies = []
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.8,<4"]
+dev = ["ruff>=0.14,<1", "build>=1,<2", "setuptools>=77", "wheel"]
+
+[project.scripts]
+cpu-sim = "scheduling_simulator.cli:main"
+
+[project.urls]
+Repository = "https://github.com/Nikkilodeonee/os-scheduling-simulator"
+
+[tool.setuptools.packages.find]
+include = ["scheduling_simulator*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I", "B", "UP"]

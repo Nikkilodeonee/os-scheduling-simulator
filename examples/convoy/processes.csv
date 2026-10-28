@@ -1,0 +1,13 @@
+algorithm,pid,arrival_time,burst_time,start_time,completion_time,waiting_time,turnaround_time,response_time
+FCFS,0,0,8,0,8,0,8,0
+FCFS,1,0,4,8,12,8,12,8
+FCFS,2,1,2,12,14,11,13,11
+FCFS,3,2,1,14,15,12,13,12
+SJF,0,0,8,7,15,7,15,7
+SJF,1,0,4,0,4,0,4,0
+SJF,2,1,2,5,7,4,6,4
+SJF,3,2,1,4,5,2,3,2
+Round Robin,0,0,8,0,15,7,15,0
+Round Robin,1,0,4,2,11,7,11,2
+Round Robin,2,1,2,4,6,3,5,3
+Round Robin,3,2,1,6,7,4,5,4
